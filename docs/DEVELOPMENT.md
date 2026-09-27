@@ -4,7 +4,7 @@
 
 ## 本地开发
 
-需要 JDK 17、Android SDK 35 / Build Tools 35.0.0。设置 `ANDROID_HOME`，或在不提交的 `local.properties` 中填写 `sdk.dir`。
+需要 JDK 17、Android SDK 35 / Build Tools 35.0.0、NDK 28.2.13676358（编译 USB Bulk 停流 JNI）。设置 `ANDROID_HOME`，或在不提交的 `local.properties` 中填写 `sdk.dir`。
 
 ```bash
 git clone https://github.com/ttermish/pocket-monitor.git

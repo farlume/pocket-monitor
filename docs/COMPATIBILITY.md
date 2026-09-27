@@ -17,3 +17,9 @@ Verified combinations will be added here with links to their test reports. Until
 欢迎通过[硬件兼容性模板](https://github.com/ttermish/pocket-monitor/issues/new?template=hardware_report.md)提交结果，并按[验证清单](VALIDATION.md)测试。请记录手机与 Android 版本、卡型号和 VID:PID、USB 连接与供电、HDMI 来源/输出规格、采集格式、是否实际看到源画面变化，以及持续 15 分钟预览、旋转、拔插和后台恢复的表现。不要附设备序列号或私人屏幕内容。
 
 完成验证后会在此添加组合和报告链接；现阶段没有推荐或认证的采集卡型号。
+
+## Bluetooth input / 蓝牙键鼠
+
+Bluetooth input in v0.1.5 requires Android 9+ and a phone that exposes the HID Device profile, plus a host supporting Bluetooth keyboards/mice. Android 8 keeps video preview but cannot enable Bluetooth input. No phone/computer pairing has been hardware-validated. BIOS/pre-boot use and USB keyboard emulation are not supported. Report the phone, Android version, computer OS, host keyboard layout and reconnect/background behavior; redact Bluetooth addresses.
+
+v0.1.5 的蓝牙键鼠需要 Android 9+、手机系统提供 HID Device，以及支持蓝牙键鼠的电脑。Android 8 仍可视频预览，不能启用蓝牙输入。尚无通过真机验证的手机/电脑组合；不支持 BIOS / 开机前使用或 USB 键盘模拟。反馈时记录手机、Android 版本、电脑系统、键盘布局和断开/后台行为，隐藏蓝牙地址。

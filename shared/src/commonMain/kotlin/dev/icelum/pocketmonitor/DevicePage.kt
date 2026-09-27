@@ -21,7 +21,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun DevicePage(state: CaptureState, onConnect: (String) -> Unit, onRefresh: () -> Unit,
-    onDisconnect: () -> Unit, onMode: (VideoMode) -> Unit) {
+    onDisconnect: () -> Unit, onMode: (VideoMode) -> Unit, onDiagnostics: () -> Unit = {}) {
     Column(Modifier.fillMaxWidth().fillMaxHeight().verticalScroll(rememberScrollState())
         .padding(horizontal = 24.dp).padding(bottom = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(stringResource(Res.string.device_page_hint), color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -37,6 +37,7 @@ internal fun DevicePage(state: CaptureState, onConnect: (String) -> Unit, onRefr
             }
         }
         OutlinedButton(onClick = onRefresh) { Text(stringResource(Res.string.refresh_devices)) }
+        TextButton(onClick = onDiagnostics) { Text(stringResource(Res.string.capture_diagnostics)) }
         HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
         Text(stringResource(Res.string.capture_format), color = MaterialTheme.colorScheme.onSurfaceVariant)
         Text(stringResource(Res.string.format_hint), fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)

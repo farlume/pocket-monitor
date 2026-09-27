@@ -14,14 +14,14 @@ To verify one downloaded APK against the `SHA256SUMS` file from the **same relea
 
 ```bash
 # Linux
-sha256sum pocket-monitor-0.1.4-release.apk
+sha256sum pocket-monitor-0.1.5-release.apk
 # macOS
-shasum -a 256 pocket-monitor-0.1.4-release.apk
+shasum -a 256 pocket-monitor-0.1.5-release.apk
 ```
 
 ```powershell
 # Windows PowerShell
-Get-FileHash .\pocket-monitor-0.1.4-release.apk -Algorithm SHA256
+Get-FileHash .\pocket-monitor-0.1.5-release.apk -Algorithm SHA256
 ```
 
 Compare the result with the line naming that APK in `SHA256SUMS`; use the actual version's filename. If you downloaded all assets, Linux users can run `sha256sum --check SHA256SUMS`, or macOS users `shasum -a 256 --check SHA256SUMS`, from that directory. Missing assets cause the full check to fail; that does not by itself mean the APK is damaged.

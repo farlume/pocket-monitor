@@ -23,13 +23,18 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.icelum.pocketmonitor.resources.*
 import org.jetbrains.compose.resources.stringResource
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MonitorScreen(
     state: CaptureState,
@@ -47,10 +52,20 @@ fun MonitorScreen(
     onTab: (AppTab) -> Unit = {},
     appVersion: String = "",
     onOpenLicenses: () -> Unit = {},
+    inputState: InputState = InputState(),
+    inputActions: InputActions = InputActions(),
+    onDiagnostics: suspend () -> String = { "" },
 ) {
     var internalTab by rememberSaveable { mutableStateOf(AppTab.Preview) }
     val tab = selectedTab ?: internalTab
+    var inputPanel by remember { mutableStateOf(false) }
     var help by rememberSaveable { mutableStateOf(false) }
+    var diagnosticReport by remember { mutableStateOf<String?>(null) }
+    var diagnosticsOpen by remember { mutableStateOf(false) }
+    var diagnosticJob by remember { mutableStateOf<Job?>(null) }
+    val scope = rememberCoroutineScope()
+    fun closeDiagnostics() { diagnosticJob?.cancel(); diagnosticsOpen = false }
+    val clipboard = LocalClipboardManager.current
     fun selectTab(next: AppTab) { internalTab = next; onTab(next) }
     MonitorTheme(preferences) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
@@ -69,6 +84,7 @@ fun MonitorScreen(
                                 Text(when (tab) {
                                     AppTab.Preview -> stringResource(Res.string.app_name)
                                     AppTab.Devices -> stringResource(Res.string.tab_devices)
+                                    AppTab.Input -> stringResource(Res.string.tab_input)
                                     AppTab.Settings -> stringResource(Res.string.tab_settings)
                                 }, fontSize = 23.sp, fontWeight = FontWeight.Bold)
                                 Text("POCKET MONITOR", color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -86,13 +102,23 @@ fun MonitorScreen(
                             .then(if (tab != AppTab.Preview) Modifier.clearAndSetSemantics {} else Modifier)) {
                             PreviewPane(state, fullscreen, compact, preferences, onFullscreen,
                                 { id -> if (id == null && state.devices.size > 1) selectTab(AppTab.Devices) else onConnect(id) },
-                                onRefresh, onDisconnect, onAppSettings, { selectTab(AppTab.Devices) }, preview)
+                                onRefresh, onDisconnect, onAppSettings, { selectTab(AppTab.Devices) }, { inputPanel = true }, preview)
                         }
                         when (tab) {
                             AppTab.Preview -> Unit
                             AppTab.Devices -> Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                                 DevicePage(state, { onConnect(it); selectTab(AppTab.Preview) }, onRefresh,
-                                    onDisconnect, { onMode(it); selectTab(AppTab.Preview) })
+                                    onDisconnect, { onMode(it); selectTab(AppTab.Preview) },
+                                    onDiagnostics = {
+                                        if (!diagnosticsOpen) {
+                                            diagnosticsOpen = true
+                                            diagnosticReport = null
+                                            diagnosticJob = scope.launch { diagnosticReport = onDiagnostics() }
+                                        }
+                                    })
+                            }
+                            AppTab.Input -> Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                                InputPage(inputState, inputActions)
                             }
                             AppTab.Settings -> Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                                 SettingsPage(preferences, onPreferences, appVersion, onOpenLicenses)
@@ -105,6 +131,7 @@ fun MonitorScreen(
                             val title = when (item) {
                                 AppTab.Preview -> stringResource(Res.string.tab_preview)
                                 AppTab.Devices -> stringResource(Res.string.tab_devices)
+                                AppTab.Input -> stringResource(Res.string.tab_input)
                                 AppTab.Settings -> stringResource(Res.string.tab_settings)
                             }
                             NavigationBarItem(selected = tab == item, onClick = { selectTab(item) },
@@ -112,6 +139,7 @@ fun MonitorScreen(
                                 icon = { Icon(when (item) {
                                     AppTab.Preview -> Icons.Outlined.Monitor
                                     AppTab.Devices -> Icons.Outlined.Usb
+                                    AppTab.Input -> Icons.Outlined.Keyboard
                                     AppTab.Settings -> Icons.Outlined.Settings
                                 }, null) }, label = { Text(title) })
                         }
@@ -119,7 +147,26 @@ fun MonitorScreen(
                 }
             }
         }
+        if (inputPanel) ModalBottomSheet(onDismissRequest = { inputPanel = false }) {
+            InputPage(inputState, inputActions, Modifier.fillMaxHeight(0.75f))
+        }
         if (help) ConnectionGuide { help = false }
+        if (diagnosticsOpen) {
+            AlertDialog(onDismissRequest = ::closeDiagnostics,
+                title = { Text(stringResource(Res.string.capture_diagnostics)) },
+                text = { Column(Modifier.heightIn(max = 400.dp).verticalScroll(rememberScrollState())) {
+                    Text(stringResource(Res.string.capture_diagnostics_hint))
+                    Spacer(Modifier.height(12.dp))
+                    Text(diagnosticReport ?: stringResource(Res.string.capture_diagnostics_loading), fontSize = 11.sp)
+                } },
+                confirmButton = { TextButton(enabled = diagnosticReport != null,
+                    onClick = { diagnosticReport?.let { clipboard.setText(AnnotatedString(it)) } }) {
+                    Text(stringResource(Res.string.copy_diagnostics))
+                } },
+                dismissButton = { TextButton(onClick = ::closeDiagnostics) {
+                    Text(stringResource(Res.string.close))
+                } })
+        }
     }
 }
 
@@ -127,7 +174,7 @@ fun MonitorScreen(
 private fun PreviewPane(state: CaptureState, fullscreen: Boolean, compact: Boolean,
     preferences: AppPreferences, onFullscreen: (Boolean) -> Unit, onConnect: (String?) -> Unit,
     onRefresh: () -> Unit, onDisconnect: () -> Unit, onAppSettings: () -> Unit,
-    onDevices: () -> Unit, preview: @Composable (Modifier) -> Unit) {
+    onDevices: () -> Unit, onInput: () -> Unit, preview: @Composable (Modifier) -> Unit) {
     var rotation by rememberSaveable { mutableIntStateOf(0) }
     var zoom by remember { mutableFloatStateOf(1f) }
     var pan by remember { mutableStateOf(Offset.Zero) }
@@ -183,6 +230,10 @@ private fun PreviewPane(state: CaptureState, fullscreen: Boolean, compact: Boole
                     Modifier.align(Alignment.BottomStart).padding(14.dp).background(Color(0xB3101619), CircleShape)
                         .padding(horizontal = 10.dp, vertical = 5.dp), color = Color.White, fontSize = 11.sp)
             }
+            FilledTonalIconButton(onClick = onInput,
+                modifier = Modifier.align(Alignment.BottomEnd).padding(8.dp).testTag("open_input")) {
+                Icon(Icons.Outlined.Keyboard, stringResource(Res.string.tab_input))
+            }
             if (fullscreen) {
                 FilledTonalIconButton(onClick = { onFullscreen(false) },
                     modifier = Modifier.align(Alignment.TopEnd).padding(8.dp).testTag("exit_fullscreen")) {
@@ -228,7 +279,7 @@ private fun DevicePanel(state: CaptureState, onConnect: (String?) -> Unit, onRef
             IconButton(onClick = onRefresh) { Icon(Icons.Outlined.Refresh, stringResource(Res.string.refresh_devices), tint = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
         if (!state.usbHostSupported) Text(stringResource(Res.string.usb_host_unsupported), color = MaterialTheme.colorScheme.error, fontSize = 12.sp)
-        if (state.phase == CapturePhase.Streaming) {
+        if (state.phase == CapturePhase.Streaming || state.phase == CapturePhase.WaitingForFrames) {
             OutlinedButton(onClick = onDisconnect, modifier = Modifier.fillMaxWidth()) { Text(stringResource(Res.string.stop_preview)) }
         } else {
             Button(onClick = { onConnect(state.selectedDeviceId ?: state.devices.singleOrNull()?.id) },

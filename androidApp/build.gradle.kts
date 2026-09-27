@@ -29,12 +29,14 @@ val validateReleaseSigning = tasks.register("validateReleaseSigning") {
 android {
     namespace = "dev.icelum.pocketmonitor"
     compileSdk = 35
+    ndkVersion = "28.2.13676358"
+    externalNativeBuild { ndkBuild { path = file("src/main/cpp/Android.mk") } }
     defaultConfig {
         applicationId = "dev.icelum.pocketmonitor"
         minSdk = 26
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.1.4"
+        versionCode = 6
+        versionName = "0.1.5"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -46,6 +48,7 @@ android {
         }
     }
     buildTypes {
+        getByName("debug") { versionNameSuffix = "-debug" }
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
         }

@@ -7,7 +7,7 @@
 随身屏（Pocket Monitor）是通过 UVC 采集卡在 Android 手机上预览 HDMI 视频的应用，使用 Kotlin Multiplatform / Compose Multiplatform。先阅读 `README.md`、`docs/VALIDATION.md` 及相关实现，再修改代码。
 
 - 唯一应用目标是 Android 8.0+；`shared` 的 JVM 目标用于测试，不是桌面客户端。
-- 当前不包含音频、录制、截图、键鼠回传或 iPhone 接收端。新增能力需以用户任务为依据。
+- 当前包含 Android 9+ 蓝牙键盘/触控板，不包含音频、录制、截图、USB 键鼠回传或 iPhone 接收端。新增能力需以用户任务为依据。
 - 当前版本和 SDK 配置以 `androidApp/build.gradle.kts` 为准，插件版本在根 `build.gradle.kts`。不要因工具提示就顺带升级依赖。
 - 真机采集尚待验证；不得把模拟器、Robolectric、界面截图或收到卡自生彩条当作真实 HDMI 验收。
 
@@ -20,6 +20,8 @@
 | `shared/.../DevicePage.kt`、`SettingsPage.kt`、`MonitorTheme.kt` | 设备选择、持久化偏好界面与多主题 |
 | `shared/src/commonMain/composeResources/` | 中英文 UI 资源；错误状态通过 `CaptureMessage` 在界面翻译 |
 | `androidApp/.../MainActivity.kt` | 权限入口、生命周期、TextureView 和显示变换 |
+| `androidApp/.../BluetoothInputController.kt`、`AndroidHidTransport.kt` | 前台蓝牙 HID 注册、明确选机、报告队列与退出清理 |
+| `shared/.../HidInput.kt`、`InputPage.kt` | HID 报告、美式键位和双语键鼠界面 |
 | `androidApp/.../AppLocale.kt`、`AppPreferencesStore.kt` | 应用内语言环境与本地偏好存储 |
 | `androidApp/.../UvcCaptureController.kt` | USB 发现与授权、原生采集、连接恢复、状态发布 |
 | `androidApp/.../PreviewFrames.kt` | 单次连接的首帧、帧计数和持续出帧判断 |
@@ -39,11 +41,19 @@
 6. 启动 8 秒无帧或启动异常时最多降级重连两次；降级不能增加像素数量或帧率，也不能从 MJPEG 自动切到 YUY2。已经出帧后的中断不能触发无限重连。
 7. 保存模式须满足持续出帧判断，不能只依据成功打开设备或偶发首帧。VID/PID 表示型号，同型号设备共用设置。
 8. 保持 TextureView 直接渲染；不要为 Compose 每帧复制 Bitmap。界面 fps 表示采集流统计，不能声称测得 HDMI 锁定状态或端到端延迟。
-9. 预览、设备、设置是页面标签，当前仅允许单卡采集。切换页面、主题或语言不能销毁已挂载的预览 View；隐藏预览控件必须移出无障碍遍历。
+9. 预览、设备、键鼠、设置是页面标签，当前仅允许单卡采集。切换页面、主题或语言不能销毁已挂载的预览 View；隐藏预览控件必须移出无障碍遍历。
+
+## 蓝牙输入约束
+
+- Android 8 保留视频功能；仅 Android 9+ 创建 HID Device 平台实现。按需申请附近设备权限，不扫描、不申请位置权限。
+- 仅向用户明确选择的已配对电脑发送。每次前台注册独立代次，过期回调不得改变当前会话。
+- 后台、主动停止、错误和超时均清空发送队列，尝试松开所有按键/鼠标按钮并注销；返回前台需用户重新启用连接。
+- 文本只支持美式键位 ASCII，最多 200 字符，发送前整段校验；不保存、不记录输入内容。中文通过电脑输入法处理，不承诺直接 Unicode 注入。
+- 输入报告必须成对按下/释放，节流发送并限制队列；鼠标移动合并发送。不可声称已验证真机键鼠、BIOS 或开机前输入。
 
 ## 本地构建与验证
 
-使用 JDK 17、Android SDK 35 / Build Tools 35.0.0，通过 `ANDROID_HOME` 或未跟踪的 `local.properties` 设置 SDK。使用仓库自带 Gradle Wrapper：
+使用 JDK 17、Android SDK 35 / Build Tools 35.0.0 和 NDK 28.2.13676358，通过 `ANDROID_HOME` 或未跟踪的 `local.properties` 设置 SDK。使用仓库自带 Gradle Wrapper：
 
 ```bash
 ./gradlew :shared:jvmTest

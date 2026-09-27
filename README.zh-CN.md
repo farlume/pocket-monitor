@@ -5,21 +5,21 @@
 <p align="center"><strong>用 Android 手机，查看电脑的 HDMI 画面。</strong></p>
 [English](README.md) · **简体中文**
 
-**[下载 Android APK](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.4/pocket-monitor-0.1.4-release.apk)** · [界面截图](#界面预览) · [开始使用](#三步开始使用) · [文档导航](docs/README.md) · [反馈问题](https://github.com/ttermish/pocket-monitor/issues/new/choose)
+**[下载 Android APK](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.5/pocket-monitor-0.1.5-release.apk)** · [界面截图](#界面预览) · [开始使用](#三步开始使用) · [文档导航](docs/README.md) · [反馈问题](https://github.com/ttermish/pocket-monitor/issues/new/choose)
 
 随身屏是一款便携视频监视器 App。把电脑的 HDMI 输出接入 USB 视频采集卡，再把采集卡连接到手机，就能在手机上预览画面，电脑无需安装发送端程序。
 
-适合想把手机当作临时小屏幕、查看另一台电脑视频输出的场景。当前为 **0.1.4 开发测试版，支持 Android 8.0 及以上**；具体手机与采集卡组合仍需实测。
+适合想把手机当作临时小屏幕、查看另一台电脑视频输出的场景。当前为 **0.1.5 开发测试版，支持 Android 8.0 及以上**；具体手机与采集卡组合仍需实测。
 
 ## 界面预览
 
-| 预览 | 设备 | 设置 |
-| :---: | :---: | :---: |
-| [![预览页：连接、旋转、视频设置与全屏](docs/images/preview-zh.png)](docs/images/preview-zh.png) | [![设备页：查找采集卡和选择视频格式](docs/images/devices-zh.png)](docs/images/devices-zh.png) | [![深色设置页：外观、配色、语言和预览偏好](docs/images/settings-zh.png)](docs/images/settings-zh.png) |
+| 预览 | 设备 | 键鼠 | 设置 |
+| :---: | :---: | :---: | :---: |
+| [![预览页：连接、旋转、视频设置与全屏](docs/images/preview-zh.png)](docs/images/preview-zh.png) | [![设备页：查找采集卡和选择视频格式](docs/images/devices-zh.png)](docs/images/devices-zh.png) | [![蓝牙键鼠设置：未连接电脑](docs/images/input-zh.png)](docs/images/input-zh.png) | [![深色设置页：外观、配色、语言和预览偏好](docs/images/settings-zh.png)](docs/images/settings-zh.png) |
 
-[逐张查看截图](docs/images/README.md)。仓库与图片已公开，无需登录。离线阅读请[下载离线文档包](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.4/pocket-monitor-0.1.4-docs.zip)并解压，保留 README 旁的 `docs/images/` 目录。
+[逐张查看截图](docs/images/README.md)。仓库与图片已公开，无需登录。离线阅读请[下载离线文档包](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.5/pocket-monitor-0.1.5-docs.zip)并解压，保留 README 旁的 `docs/images/` 目录。
 
-**预览 · 设备 · 设置。** 截图来自应用实际界面的自动化渲染，展示浅色和深色外观下未连接采集卡的状态；目前尚未完成真实 HDMI 采集验收。
+**预览 · 设备 · 键鼠 · 设置。** 截图来自应用实际界面的自动化渲染，展示浅色和深色外观下未连接采集卡或电脑的状态，键鼠页使用模拟的就绪状态；目前尚未完成真实 HDMI 采集验收。
 
 ## 可以做什么
 
@@ -30,7 +30,7 @@
 - **按习惯调整界面**：浅色、深色或跟随系统，薄荷绿、海洋蓝、琥珀金三种配色；简体中文、English 或跟随系统语言，偏好自动保存。
 - **本地预览**：不录制、不上传视频；切到后台时停止采集，返回后尝试恢复。
 
-当前仅支持视频预览，不包含声音、录制、截图或键鼠回传；尚未提供 iPhone 版本。
+**v0.1.5 新增：** Android 9+ 蓝牙 ANSI 键盘与触控板。不包含声音、录制、截图；尚未提供 iPhone 版本。
 
 ## 准备哪些设备
 
@@ -45,7 +45,7 @@
 
 ## 安装
 
-[下载签名 Android APK](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.4/pocket-monitor-0.1.4-release.apk) · [发行说明、源码与校验值](https://github.com/ttermish/pocket-monitor/releases/tag/v0.1.4)
+[下载签名 Android APK](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.5/pocket-monitor-0.1.5-release.apk) · [发行说明、源码与校验值](https://github.com/ttermish/pocket-monitor/releases/tag/v0.1.5)
 
 APK 已公开下载，无需登录。开发者也可按[构建指南](docs/DEVELOPMENT.md)生成安装包。
 
@@ -53,8 +53,8 @@ APK 已公开下载，无需登录。开发者也可按[构建指南](docs/DEVEL
 | --- | --- |
 | `*-release.apk` | 在 Android 手机上安装。 |
 | `*-release.aab` | 商店分发使用，不能直接安装。 |
-| [`*-source.zip`](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.4/pocket-monitor-0.1.4-source.zip) | 源码与完整文档，包含界面截图。 |
-| [`*-docs.zip`](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.4/pocket-monitor-0.1.4-docs.zip) | 双语指南和截图，完整解压后离线阅读。 |
+| [`*-source.zip`](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.5/pocket-monitor-0.1.5-source.zip) | 源码与完整文档，包含界面截图。 |
+| [`*-docs.zip`](https://github.com/ttermish/pocket-monitor/releases/download/v0.1.5/pocket-monitor-0.1.5-docs.zip) | 双语指南和截图，完整解压后离线阅读。 |
 | `SHA256SUMS` | 核对下载文件是否完整，见[下载说明](docs/DOWNLOADS.md)。 |
 
 新标签页面如果只显示 **Source code**，说明该版本的 APK 尚未发布；等待 **Android Release** 工作流完成，再从 **Assets** 下载 `.apk`，或直接点击上面的 APK 链接。Source code 是源码，不是安装包。
@@ -100,13 +100,27 @@ APK 已公开下载，无需登录。开发者也可按[构建指南](docs/DEVEL
 
 格式越高不一定越流畅，实际表现取决于 USB 带宽、采集卡和手机供电。默认优先选择接近 720p / 30 fps 的 MJPEG；稳定出帧的格式按采集卡型号记忆，同型号设备共用。
 
+**v0.1.5 格式切换：** 切换采集格式时保留已授权的 USB 连接，销毁原生相机后清理视频 Bulk 输入端点（若存在），再按目标格式创建并启动相机；重复选择正在出画或等待首帧的格式不会打断预览。等待首帧期间可点击「停止预览」取消；重复连接同一张正在启动或出画的采集卡不会重置启动计时。启动失败仍按下方规则有限降级重连，修复效果待真机复测。
+
+**已知未解决问题：** 用户的 OPPO PLG110 / Android 16 搭配 UGREEN 95348（`2b89:5348`）从可出画的 720p 切换后可能停止出帧，自动降级或手动切回仍需拔插恢复。设备报告支持不等于实际可用，本版不宣称已修复该故障。
+
 ## 设置外观与语言
 
 打开底部「设置」标签，可选择「跟随系统 / 浅色 / 深色」显示模式，以及「薄荷绿 / 海洋蓝 / 琥珀金」主题色。语言支持简体中文、English 和跟随系统，切换后即时生效；暂未支持的系统语言使用英文。
 
 「预览偏好」可关闭保持亮屏，或隐藏帧率与分辨率。偏好保存在手机本地，重启后仍有效；「关于 → 开源许可」可离线查看随包附带的第三方声明。
 
-三个标签分别管理预览、采集设备和应用偏好。切换标签会保留预览组件；当前一次只连接一张采集卡，不支持多路同时采集。离开应用进入后台时停止采集。
+四个标签分别管理预览、采集设备、蓝牙键鼠和应用偏好。切换标签会保留预览组件；当前一次只连接一张采集卡，不支持多路同时采集。离开应用进入后台时停止采集。
+
+## 把手机当作键盘和触控板
+
+打开「键鼠 → 启用键鼠」，按提示允许附近的设备权限（Android 12+），并开启蓝牙。先在系统蓝牙设置中与电脑配对，返回 App 后重新启用；也可以点击「允许电脑发现」，从电脑添加手机。刷新已配对列表，明确选择要控制的电脑。
+
+键盘采用 104 键 ANSI 布局，包含完整标点、Caps Lock、F1–F12、导航键和可展开的数字键盘；左右 Shift、Ctrl、Option/Alt、Command/Win 独立。整块键盘可左右滑动，横屏能显示更多键位。默认点按时先选修饰键，再点按键发送一次组合键；单独点击键帽发送按下/松开。打开「按住模式」后可多指按住组合键，最多同时按 6 个普通键和 8 个修饰键；「松开所有键」会释放按键并清空队列。「发送文本」最多接受 200 个 ASCII 字符，按美式键位发送，请在电脑选择对应布局并关闭大写锁定；中文通过电脑端输入法输入。切到「触控板」可滑动移动鼠标、轻点单击，也有左键、右键和滚轮按钮。预览画面上的键盘按钮可打开操作面板。
+
+**Mac 键盘识别：** 点击 App 内「Mac 键盘识别」查看提示。若助理要求按左 Shift 右边的键，按 Z；若要求按右 Shift 左边的键，按 /。按电脑的具体提示操作，类型选 ANSI（美式）。本布局不模拟 Apple 专有 Fn/地球键或 Touch ID；识别向导完成情况仍需真机验证。
+
+需要 **Android 9+、手机支持蓝牙 HID Device、电脑支持蓝牙键盘**，电脑无需安装配套程序。手机和电脑的实际兼容性仍待验证。离开前台会停止输入，返回后需重新启用并连接。不支持 BIOS / 开机前输入、直接传输中文或表情、USB 键盘模拟。启用 Android HID Device 可能暂时断开连接到手机的蓝牙输入设备。
 
 ## 遇到问题
 
@@ -114,11 +128,15 @@ APK 已公开下载，无需登录。开发者也可按[构建指南](docs/DEVEL
 
 **拒绝权限后无法连接？** 重新点击授权。系统不再弹窗时，从「系统设置」开启相机权限，然后重新连接并允许 USB 访问。
 
+**只看到桌面壁纸，看不到浏览器或其他窗口？** 电脑可能处于扩展桌面模式。Mac 在「系统设置 → 显示器」中选中外接显示器，将「用作」改为镜像主屏；Windows 按 Win + P 选择「复制」。也可以保留扩展模式，将窗口移到采集卡对应的显示器上。
+
 **提示无法打开设备？** 关闭其他占用采集卡的应用，拔插后再试。
 
 **有彩条或黑屏，却显示「实时画面」？** 部分采集卡会自己生成彩条或无信号画面。App 收到视频帧不代表电脑已正常输出；请检查 HDMI 线、电脑显示设置和采集卡供电。HDCP 加密内容不在支持范围内。
 
 **一直等待画面或视频中断？** 启动 8 秒无帧时，App 最多尝试两次较低规格。仍无画面时检查连接，或在「设备」页中手动切换格式；已经出画后的断流不会反复自动重连。
+
+**每次插入重复弹窗，或切格式后必须拔插才能恢复？** v0.1.5 仅在 USB 已授权后自动重连，避免与系统的插入提示同时申请权限；未授权时请点击「连接采集卡」。在 v0.1.5 中复现失败后打开「设备 → 连接诊断 → 复制诊断」，反馈其中的手机/版本、设备报告的格式、连接阶段、USB 速率/端点、Bulk stop 结果及本应用的部分 UVC 原生日志。报告不包含视频或键盘输入，不会自动上传。
 
 **切到后台后画面停止？** 这是正常行为。采集仅在前台运行，返回 App 后会尝试恢复；如未恢复，可手动重新连接。
 

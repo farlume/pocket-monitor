@@ -47,6 +47,8 @@ class AppSettingsTest {
         compose.onNodeWithTag("nav_devices").performClick()
         compose.onNodeWithText("No UVC video device found. Check OTG, cables and power.").assertIsDisplayed()
         compose.onNodeWithTag("connect").assertDoesNotExist()
+        compose.onNodeWithTag("nav_input").performClick()
+        compose.onNodeWithTag("input_enable").assertIsDisplayed()
         compose.onNodeWithTag("nav_settings").performClick()
         compose.onNodeWithTag("theme_dark").performClick()
         compose.onNodeWithTag("accent_ocean").performClick()
@@ -107,7 +109,7 @@ class AppSettingsTest {
         compose.setContent {
             AppLocale(preferences.language) {
                 MonitorScreen(CaptureState(), false, {}, {}, {}, {}, {}, {}, { Box(it) },
-                    preferences, { preferences = it }, appVersion = "0.1.3")
+                    preferences, { preferences = it }, appVersion = "0.1.5", inputState = InputState(InputPhase.Ready))
             }
         }
         for (language in listOf(AppLanguage.English, AppLanguage.Chinese)) {
@@ -117,6 +119,8 @@ class AppSettingsTest {
             screenshot("preview-$suffix")
             compose.onNodeWithTag("nav_devices").performClick()
             screenshot("devices-$suffix")
+            compose.onNodeWithTag("nav_input").performClick()
+            screenshot("input-$suffix")
             compose.onNodeWithTag("nav_settings").performClick()
             compose.onNodeWithTag("theme_dark").performClick()
             screenshot("settings-$suffix")

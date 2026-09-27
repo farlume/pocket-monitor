@@ -47,7 +47,7 @@ jobs:
         with:
           cache-disabled: true
       - name: Install Android SDK packages
-        run: '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0"'
+        run: '$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;28.2.13676358"'
       - name: Run tests
         run: |
           python3 scripts/check_project.py

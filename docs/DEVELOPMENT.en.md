@@ -2,7 +2,7 @@
 
 [简体中文](DEVELOPMENT.md) · [Product guide](../README.md)
 
-Use JDK 17, Android SDK 35 and Build Tools 35.0.0. Set `ANDROID_HOME` or put `sdk.dir=/your/android/sdk` in an untracked `local.properties`. Use the bundled Gradle Wrapper; do not commit local SDK paths or keys.
+Use JDK 17, Android SDK 35, Build Tools 35.0.0 and NDK 28.2.13676358 (for the USB Bulk stop JNI helper). Set `ANDROID_HOME` or put `sdk.dir=/your/android/sdk` in an untracked `local.properties`. Use the bundled Gradle Wrapper; do not commit local SDK paths or keys.
 
 ```bash
 ./gradlew :shared:jvmTest

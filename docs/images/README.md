@@ -4,12 +4,13 @@
 | --- | --- | --- |
 | Preview / 预览 | [Open image](preview-en.png) | [查看图片](preview-zh.png) |
 | Devices / 设备 | [Open image](devices-en.png) | [查看图片](devices-zh.png) |
+| Keyboard / 键鼠 | [Open image](input-en.png) | [查看图片](input-zh.png) |
 | Settings / 设置 | [Open image](settings-en.png) | [查看图片](settings-zh.png) |
 | App icon / 应用图标 | [PNG](app-icon.png) | [SVG 源图](app-icon.svg) |
 
-The screenshots show the actual app UI rendered by Robolectric, without a connected capture card. They are not evidence of working HDMI capture. The images are publicly accessible without signing in; offline readers need the complete source archive, not a standalone README attachment.
+The screenshots show the actual app UI rendered by Robolectric, without a connected capture card or computer. The Keyboard page shows a simulated ready state with no paired devices. These are not evidence of working HDMI capture or Bluetooth input. The images are publicly accessible without signing in; offline readers need the complete source archive, not a standalone README attachment.
 
-截图由 Robolectric 渲染实际应用 UI，展示未连接采集卡的状态，不作为 HDMI 采集成功的证据。图片已公开，无需登录；离线阅读请下载并解压完整源码包，单独下载 README 附件不含图片。
+截图由 Robolectric 渲染实际应用 UI，展示未连接采集卡或电脑的状态；键鼠页使用无配对设备的就绪状态测试数据，不作为 HDMI 或蓝牙输入成功的证据。图片已公开，无需登录；离线阅读请下载并解压完整源码包，单独下载 README 附件不含图片。
 
 ## 更新双语截图
 
@@ -17,7 +18,7 @@ The screenshots show the actual app UI rendered by Robolectric, without a connec
 ./gradlew :androidApp:testDebugUnitTest --tests 'dev.icelum.pocketmonitor.AppSettingsTest.renderEnglishAndChinesePages'
 ```
 
-`preview-*`、`devices-*`、`settings-*` 的输出位于 `androidApp/build/reports/screenshots/`。检查实际图片后再复制到本目录；不要用生成的假视频替代真实采集内容。README 使用标准 Markdown 图片链接，保留文件名大小写和相对路径。
+`preview-*`、`devices-*`、`input-*`、`settings-*` 的输出位于 `androidApp/build/reports/screenshots/`。检查实际图片后再复制到本目录；不要用生成的假视频替代真实采集内容。README 使用标准 Markdown 图片链接，保留文件名大小写和相对路径。
 
 图标的矢量源为 `app-icon.svg`，与 Android 启动图标保持一致。README 使用 PNG 导出，便于不支持 SVG 的预览器查看。更新矢量图后同步导出：
 
