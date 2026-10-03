@@ -93,7 +93,7 @@ def package_documentation(source_zip, output, prefix, repository, revision):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts/documentation")
-    parser.add_argument("--repository", default=os.environ.get("GITHUB_REPOSITORY", "ttermish/pocket-monitor"))
+    parser.add_argument("--repository", default=os.environ.get("GITHUB_REPOSITORY", "farlume/pocket-monitor"))
     args = parser.parse_args()
     if args.output.exists() and any(args.output.iterdir()):
         raise SystemExit("Output directory must be empty")

@@ -8,7 +8,7 @@
 
 ## 私密报告
 
-仓库已启用私密漏洞报告。如发现可能导致未授权 USB 访问、敏感数据泄露、依赖漏洞或恶意视频输入触发崩溃等安全问题，请使用仓库 Security 页面中的 [Report a vulnerability](https://github.com/ttermish/pocket-monitor/security/advisories/new) 入口。
+仓库已启用私密漏洞报告。如发现可能导致未授权 USB 访问、敏感数据泄露、依赖漏洞或恶意视频输入触发崩溃等安全问题，请使用仓库 Security 页面中的 [Report a vulnerability](https://github.com/farlume/pocket-monitor/security/advisories/new) 入口。
 
 如果没有私密报告入口，请创建一个仅请求私密联系渠道的 Issue；不要在其中提供漏洞细节、利用代码、私人日志或受影响用户数据，等待维护者给出私密渠道后再发送。
 

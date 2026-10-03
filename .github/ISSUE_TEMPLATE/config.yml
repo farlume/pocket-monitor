@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Usage and documentation / 使用与文档
-    url: https://github.com/ttermish/pocket-monitor/blob/main/docs/README.md
+    url: https://github.com/farlume/pocket-monitor/blob/main/docs/README.md
     about: Installation, wiring, troubleshooting and contribution guides / 安装、接线、排障与贡献指南
   - name: Report a security vulnerability privately / 私密报告安全漏洞
-    url: https://github.com/ttermish/pocket-monitor/security/advisories/new
+    url: https://github.com/farlume/pocket-monitor/security/advisories/new
     about: Use this private channel for vulnerability details / 请通过私密渠道提交漏洞细节

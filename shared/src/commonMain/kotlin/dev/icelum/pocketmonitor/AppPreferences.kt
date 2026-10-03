@@ -11,4 +11,7 @@ data class AppPreferences(
     val language: AppLanguage = AppLanguage.System,
     val keepScreenOn: Boolean = true,
     val showFrameStats: Boolean = true,
+    val keyboardLayout: KeyboardLayout = KeyboardLayout.Tkl87,
+    val keyboardTheme: KeyboardTheme = KeyboardTheme.Ivory,
+    val keyboardHaptics: Boolean = true,
 )

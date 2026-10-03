@@ -8,7 +8,7 @@ This project is in early development. Security fixes target `main` and subsequen
 
 ## Report privately
 
-Private vulnerability reporting is enabled. For potential unauthorized USB access, sensitive-data exposure, dependency vulnerabilities or crashes caused by malicious video input, use [Report a vulnerability](https://github.com/ttermish/pocket-monitor/security/advisories/new) on the repository’s Security page.
+Private vulnerability reporting is enabled. For potential unauthorized USB access, sensitive-data exposure, dependency vulnerabilities or crashes caused by malicious video input, use [Report a vulnerability](https://github.com/farlume/pocket-monitor/security/advisories/new) on the repository’s Security page.
 
 If no private reporting option is available, open an issue that only asks for a private contact channel. Do not include vulnerability details, exploit code, private logs or affected users’ data. Wait for a maintainer to provide a private channel before sending those details.
 

@@ -19,7 +19,8 @@ class AppPreferencesStoreTest {
     }
 
     @Test fun settingsSurviveStoreRecreation() {
-        val expected = AppPreferences(ThemeMode.Dark, AccentColor.Ocean, AppLanguage.English, false, false)
+        val expected = AppPreferences(ThemeMode.Dark, AccentColor.Ocean, AppLanguage.English, false, false,
+            KeyboardLayout.Compact84, KeyboardTheme.BlackGold, false)
         AppPreferencesStore(context).write(expected)
         assertEquals(expected, AppPreferencesStore(context).read())
     }
@@ -30,5 +31,12 @@ class AppPreferencesStoreTest {
             .putString("language", "Chinese").putString("keep_screen_on", "bad-value")
             .putBoolean("show_frame_stats", false).commit()
         assertEquals(AppPreferences(language = AppLanguage.Chinese, showFrameStats = false), AppPreferencesStore(context).read())
+    }
+
+    @Test fun corruptKeyboardPreferencesFallBackToPlayableDefaults() {
+        context.getSharedPreferences("app_preferences", Context.MODE_PRIVATE).edit()
+            .putString("keyboard_layout", "future-layout").putInt("keyboard_theme", 4)
+            .putString("keyboard_haptics", "wrong-type").commit()
+        assertEquals(AppPreferences(), AppPreferencesStore(context).read())
     }
 }

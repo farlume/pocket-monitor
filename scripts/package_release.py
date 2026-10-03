@@ -61,7 +61,7 @@ def main():
     subprocess.run(["git", "archive", "--format=zip", f"--prefix={prefix}/",
                     f"--output={output / (prefix + '-source.zip')}", "HEAD"], cwd=ROOT, check=True)
     package_documentation(output / (prefix + "-source.zip"), output, prefix,
-                          os.environ.get("GITHUB_REPOSITORY", "ttermish/pocket-monitor"), revision)
+                          os.environ.get("GITHUB_REPOSITORY", "farlume/pocket-monitor"), revision)
     shutil.make_archive(str(output / "third-party-licenses"), "zip",
                         ROOT / "androidApp/src/main/assets", "licenses")
     for name, (url, expected_hash) in DEPENDENCIES.items():

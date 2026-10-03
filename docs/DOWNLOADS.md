@@ -2,7 +2,7 @@
 
 ## English
 
-Open the [latest release](https://github.com/ttermish/pocket-monitor/releases/latest) and choose the file ending in **`-release.apk`** under Assets. Open that file on an Android 8.0+ phone. GitHub **Source code** archives contain source files, not an installable app; `.aab` files are for store distribution.
+Open the [latest release](https://github.com/farlume/pocket-monitor/releases/latest) and choose the file ending in **`-release.apk`** under Assets. Open that file on an Android 8.0+ phone. GitHub **Source code** archives contain source files, not an installable app; `.aab` files are for store distribution.
 
 For an update, use a Release APK signed with the same key as the installed Release version. Debug and Release builds use different keys. Removing an incompatible installation clears its local settings.
 
@@ -14,21 +14,21 @@ To verify one downloaded APK against the `SHA256SUMS` file from the **same relea
 
 ```bash
 # Linux
-sha256sum pocket-monitor-0.1.5-release.apk
+sha256sum pocket-monitor-0.1.6-release.apk
 # macOS
-shasum -a 256 pocket-monitor-0.1.5-release.apk
+shasum -a 256 pocket-monitor-0.1.6-release.apk
 ```
 
 ```powershell
 # Windows PowerShell
-Get-FileHash .\pocket-monitor-0.1.5-release.apk -Algorithm SHA256
+Get-FileHash .\pocket-monitor-0.1.6-release.apk -Algorithm SHA256
 ```
 
 Compare the result with the line naming that APK in `SHA256SUMS`; use the actual version's filename. If you downloaded all assets, Linux users can run `sha256sum --check SHA256SUMS`, or macOS users `shasum -a 256 --check SHA256SUMS`, from that directory. Missing assets cause the full check to fail; that does not by itself mean the APK is damaged.
 
 ## 简体中文
 
-打开[最新版本](https://github.com/ttermish/pocket-monitor/releases/latest)，在 Assets 中选择 **`-release.apk`** 结尾的文件，在 Android 8.0+ 手机上打开安装。GitHub 的 **Source code** 是源码，不是安装包；`.aab` 用于商店分发。
+打开[最新版本](https://github.com/farlume/pocket-monitor/releases/latest)，在 Assets 中选择 **`-release.apk`** 结尾的文件，在 Android 8.0+ 手机上打开安装。GitHub 的 **Source code** 是源码，不是安装包；`.aab` 用于商店分发。
 
 升级时使用与已安装 Release 同签名的 APK。Debug 与 Release 使用不同签名；卸载不兼容的旧安装会清除本地设置。
 

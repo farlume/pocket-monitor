@@ -9,6 +9,7 @@ Pocket Monitor turns an Android phone into an HDMI video monitor through a UVC c
 | Install and use / 安装与使用 | [Product guide](../README.md) | [产品指南](../README.zh-CN.md) |
 | Choose and verify downloads / 下载与校验 | [Download guide](DOWNLOADS.md) | [下载说明](DOWNLOADS.md) |
 | Screenshots / 界面截图 | [Screenshots](images/README.md) | [截图与来源](images/README.md) |
+| Keyboard layouts and themes / 键盘布局与主题 | [Physical keyboard](KEYBOARD.md) | [实体键盘与主题预览](KEYBOARD.md) |
 | Build and test / 构建与测试 | [Development](DEVELOPMENT.en.md) | [开发指南](DEVELOPMENT.md) |
 | Contribute / 参与贡献 | [Contributing](../CONTRIBUTING.md) | [贡献指南](../CONTRIBUTING.zh-CN.md) |
 | Privacy / 隐私 | [Privacy](PRIVACY.md) | [隐私说明](PRIVACY.md) |

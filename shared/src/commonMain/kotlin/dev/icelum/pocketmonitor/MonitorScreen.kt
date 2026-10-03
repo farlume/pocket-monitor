@@ -118,7 +118,7 @@ fun MonitorScreen(
                                     })
                             }
                             AppTab.Input -> Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
-                                InputPage(inputState, inputActions)
+                                InputPage(inputState, inputActions, preferences = preferences, onPreferences = onPreferences)
                             }
                             AppTab.Settings -> Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                                 SettingsPage(preferences, onPreferences, appVersion, onOpenLicenses)
@@ -148,7 +148,7 @@ fun MonitorScreen(
             }
         }
         if (inputPanel) ModalBottomSheet(onDismissRequest = { inputPanel = false }) {
-            InputPage(inputState, inputActions, Modifier.fillMaxHeight(0.75f))
+            InputPage(inputState, inputActions, Modifier.fillMaxHeight(0.75f), preferences, onPreferences)
         }
         if (help) ConnectionGuide { help = false }
         if (diagnosticsOpen) {

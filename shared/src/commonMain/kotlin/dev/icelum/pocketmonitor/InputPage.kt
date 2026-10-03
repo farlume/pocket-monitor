@@ -33,7 +33,8 @@ class InputActions(
 )
 
 @Composable
-fun InputPage(state: InputState, actions: InputActions, modifier: Modifier = Modifier) {
+fun InputPage(state: InputState, actions: InputActions, modifier: Modifier = Modifier,
+    preferences: AppPreferences = AppPreferences(), onPreferences: (AppPreferences) -> Unit = {}) {
     Column(modifier.fillMaxSize().imePadding().verticalScroll(rememberScrollState()).padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)) {
         if (state.phase == InputPhase.Connected) {
@@ -79,14 +80,15 @@ fun InputPage(state: InputState, actions: InputActions, modifier: Modifier = Mod
                 }
             }
         }
-        if (state.phase == InputPhase.Connected) InputControls(state, actions)
+        if (state.phase == InputPhase.Connected) InputControls(state, actions, preferences, onPreferences)
         Text(stringResource(Res.string.input_limitations), style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
 
 @Composable
-private fun InputControls(state: InputState, actions: InputActions) {
+private fun InputControls(state: InputState, actions: InputActions, preferences: AppPreferences,
+    onPreferences: (AppPreferences) -> Unit) {
     var text by remember { mutableStateOf("") }
     var pointerMode by remember { mutableStateOf(false) }
     val invalid = text.isNotEmpty() && HidReports.text(text) == null
@@ -102,7 +104,7 @@ private fun InputControls(state: InputState, actions: InputActions) {
         Touchpad(state, actions)
         return
     }
-    KeyboardPanel(state.sending, actions)
+    KeyboardPanel(state.sending, actions, preferences, onPreferences)
     OutlinedTextField(value = text, onValueChange = { if (it.length <= HidReports.MAX_TEXT) text = it },
         modifier = Modifier.fillMaxWidth().testTag("input_text"), enabled = !state.sending,
         label = { Text(stringResource(Res.string.input_text)) }, isError = invalid,

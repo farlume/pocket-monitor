@@ -125,7 +125,7 @@
     <string name="input_no_hosts">No paired devices yet. Pair your computer first.</string>
     <string name="input_limitations">Android 9+; device compatibility needs testing. Input stops in the background: enable and connect again on return. BIOS / pre-boot input is not supported.</string>
     <string name="input_keyboard">Keyboard</string>
-    <string name="input_modifier_hint">Select left/right modifiers below, then tap a key for a shortcut. Keycaps send a press and release. ⌥ is Option; ⌘ is Command.</string>
+    <string name="input_modifier_hint">Tap a modifier keycap or select it below, then tap a key for a shortcut. Selected modifiers light up and clear after one shortcut. ⌥ is Option; ⌘ is Command.</string>
     <string name="input_text">Text to send</string>
     <string name="input_text_hint">Up to 200 ASCII characters, using US keyboard positions. Select a matching layout on the computer. For Chinese, use its input method. Text is sent without modifiers.</string>
     <string name="input_invalid_text">Use English letters, numbers and standard punctuation. Chinese and emoji cannot be sent directly.</string>
@@ -153,4 +153,18 @@
     <string name="input_right_alt">Right Option/Alt</string>
     <string name="input_left_meta">Left Command/Win</string>
     <string name="input_right_meta">Right Command/Win</string>
+    <string name="keyboard_space">Space</string>
+    <string name="keyboard_expand">Fullscreen keyboard</string>
+    <string name="keyboard_close">Back</string>
+    <string name="keyboard_tkl87">87 keys · TKL</string>
+    <string name="keyboard_compact84">84 keys · K2</string>
+    <string name="keyboard_ivory">C1 · Ivory</string>
+    <string name="keyboard_graphite">K2 · Graphite</string>
+    <string name="keyboard_black_gold">Akko · Black &amp; Gold</string>
+    <string name="keyboard_sea">Varmilo · Sea</string>
+    <string name="keyboard_reference">Layout and colors based on Keychron C1/K2, Akko 5087B and Varmilo Sea Melody.</string>
+    <string name="keyboard_haptics">Key vibration</string>
+    <string name="keyboard_fit">Show whole keyboard</string>
+    <string name="keyboard_lighting">Key lighting</string>
+    <string name="keyboard_fn_hint">Fn layer: arrows → Home / End / PgUp / PgDn; Backspace → Del; Del → Ins. Tap Fn again to exit.</string>
 </resources>
